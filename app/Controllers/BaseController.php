@@ -44,5 +44,9 @@ class BaseController extends Controller
 		// $this->session = \Config\Services::session();
 		$this->postModel = new \App\Models\PostModel();
 		$this->archiveModel = new \App\Models\ArchiveModel();
+		$this->categoryModel = new \App\Models\CategoryModel();
+
+		// Load Category
+		$this->category = $this->categoryModel->findAll();
 	}
 }

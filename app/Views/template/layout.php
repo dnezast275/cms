@@ -59,11 +59,11 @@
                                 <ul>
                                     <li class="active"><a href="<?= base_url(); ?>">Home</a></li>
                                     <li><a href="<?= base_url('/archive'); ?>">Archive</a></li>
-                                    <li><a href="#">Pages</a>
+                                    <li><a href="#">Category</a>
                                         <ul class="dropdown">
-                                            <li><a href="<?= base_url('/post') ?>">Single Post</a></li>
-                                            <li><a href="<?= base_url('/about') ?>">About Us</a></li>
-                                            <li><a href="<?= base_url('/contact') ?>">Contact</a></li>
+                                            <?php foreach ($category as $c) : ?>
+                                                <li><a href="<?= base_url('/category') . '/' . $c['category_slug'] ?>"><?= $c['category_name'] ?></a></li>
+                                            <?php endforeach; ?>
                                         </ul>
                                     </li>
                                     <li><a href="#">Mega</a>
