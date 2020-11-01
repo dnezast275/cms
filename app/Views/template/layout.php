@@ -12,7 +12,7 @@
     <title><?= $title; ?></title>
 
     <!-- Favicon -->
-    <link rel="icon" href="<?= base_url() ?>/img/core-img/favicon.ico">
+    <link rel="icon" href="<?= base_url() ?>/img/favicon.png">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="<?= base_url() ?>/style.css">
@@ -38,7 +38,7 @@
                 <nav class="classy-navbar justify-content-between" id="magNav">
 
                     <!-- Nav brand -->
-                    <a href="<?= base_url(); ?>" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
+                    <a href="<?= base_url(); ?>" class="nav-brand"><img src="<?= base_url() ?>/img/logo.png" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">

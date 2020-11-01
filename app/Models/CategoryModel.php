@@ -13,4 +13,9 @@ class CategoryModel extends Model
     {
         return $this->db->table('post')->where(['category_slug' => $slug])->get()->getResultArray();
     }
+
+    public function getCategoryBySlug($slug)
+    {
+        return $this->db->table('category')->where(['category_slug' => $slug])->get()->getRowArray();
+    }
 }
