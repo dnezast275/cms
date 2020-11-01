@@ -11,6 +11,7 @@ class Archive extends BaseController
         $data = [
             'title'         => 'Archive | dNezast',
             'allPost'       => $allPost,
+            'category'      => $this->category,
         ];
 
         return view('blog/archive', $data);

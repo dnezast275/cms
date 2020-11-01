@@ -13,6 +13,7 @@ class Post extends BaseController
             'title'         => $postData['title'] . ' | dNezast',
             'breadcumb'     => 'Post',
             'postData'      => $postData,
+            'category'    => $this->category,
         ];
 
         return view('blog/post', $data);
