@@ -45,6 +45,7 @@ class BaseController extends Controller
 		$this->postModel = new \App\Models\PostModel();
 		$this->archiveModel = new \App\Models\ArchiveModel();
 		$this->categoryModel = new \App\Models\CategoryModel();
+		$this->commentModel = new \App\Models\CommentModel();
 
 		// Load Category
 		$this->category = $this->categoryModel->findAll();
