@@ -119,7 +119,6 @@
 
     <?= $this->renderSection('content') ?>
 
-    <!-- Sidebar Widget -->
     <div class="col-12 col-md-6 col-lg-5 col-xl-4">
         <div class="sidebar-area bg-white mb-30 box-shadow">
             <!-- Sidebar Widget -->
@@ -147,9 +146,8 @@
                 <!-- Catagory Widget -->
                 <ul class="catagory-widgets">
                     <?php foreach ($category as $c) : ?>
-                        <li><a href="<?= base_url('/category') . '/' . $c['category_slug'] ?>"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> <?= $c['category_name'] ?></span> <span>30</span></a></a></li>
+                        <li><a href="<?= base_url('/category') . '/' . $c['category_slug'] ?>"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> <?= $c['category_name'] ?></span> <span>30</span></a></li>
                     <?php endforeach; ?>
-
                 </ul>
             </div>
 
@@ -236,12 +234,14 @@
                         <button type="submit" class="btn mag-btn w-100">Subscribe</button>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>
     </div>
     </div>
-    </section>
+    </div>
+    <!-- ##### Archive Post Area End ##### -->
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">

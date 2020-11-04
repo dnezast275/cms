@@ -859,38 +859,38 @@ input:focus {
   z-index: 1;
   background-color: #ffffff;
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 300px;
-  flex: 0 0 300px;
-  max-width: 300px;
-  width: 300px;
+  -ms-flex: 0 0 400px;
+  flex: 0 0 400px;
+  max-width: 400px;
+  width: 400px;
   margin-left: 15px;
   margin-right: 15px;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1499px) {
   .post-sidebar-area {
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 280px;
-    flex: 0 0 280px;
-    max-width: 280px;
-    width: 280px;
+    -ms-flex: 0 0 350px;
+    flex: 0 0 350px;
+    max-width: 350px;
+    width: 350px;
   }
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .post-sidebar-area {
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 calc(50% - 30px);
-    flex: 0 0 calc(50% - 30px);
-    max-width: calc(50% - 30px);
-    width: calc(50% - 30px);
+    -ms-flex: 0 0 calc(100% - 30px);
+    flex: 0 0 calc(100% - 30px);
+    max-width: calc(100% - 30px);
+    width: calc(100% - 30px);
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .post-sidebar-area {
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 calc(50% - 30px);
-    flex: 0 0 calc(50% - 30px);
-    max-width: calc(50% - 30px);
-    width: calc(50% - 30px);
+    -ms-flex: 0 0 calc(100% - 30px);
+    flex: 0 0 calc(100% - 30px);
+    max-width: calc(100% - 30px);
+    width: calc(100% - 30px);
   }
 }
 @media only screen and (max-width: 767px) {
@@ -908,20 +908,20 @@ input:focus {
   z-index: 1;
   background-color: #ffffff;
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 calc(100% - 690px);
-  flex: 0 0 calc(100% - 690px);
-  max-width: calc(100% - 690px);
-  width: calc(100% - 690px);
+  -ms-flex: 0 0 calc(100% - 460px);
+  flex: 0 0 calc(100% - 460px);
+  max-width: calc(100% - 460px);
+  width: calc(100% - 460px);
   margin-left: 15px;
   margin-right: 15px;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1499px) {
   .mag-posts-content {
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 calc(100% - 650px);
-    flex: 0 0 calc(100% - 650px);
-    max-width: calc(100% - 650px);
-    width: calc(100% - 650px);
+    -ms-flex: 0 0 calc(100% - 420px);
+    flex: 0 0 calc(100% - 420px);
+    max-width: calc(100% - 420px);
+    width: calc(100% - 420px);
   }
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -2150,11 +2150,19 @@ blockquote .quote-name {
 }
 .footer-area .footer-widget .foo-logo {
   display: block;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
 }
 .footer-area .footer-widget p {
   margin-bottom: 30px;
   display: block;
+}
+.footer-area .footer-widget .address {
+  color: #fff;
+  font-size: 16px;
+}
+.footer-area .footer-widget span {
+  color: #fff;
+  font-size: 14px;
 }
 .footer-area .footer-widget .footer-social-info a {
   display: inline-block;
@@ -2385,9 +2393,9 @@ blockquote .quote-name {
 }
 .footer-area .copywrite-area .footer-nav ul li a {
   display: inline-block;
-  color: #777777;
+  color: #fff;
   font-size: 14px;
-  padding: 0 15px;
+  padding: 0;
   font-weight: 400;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {

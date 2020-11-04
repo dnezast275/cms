@@ -23,7 +23,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= base_url(); ?>"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                        <li class="breadcrumb-item"><a href="<?= base_url('/post') ?>"><?= $breadcumb; ?></a></li>
+                        <li class="breadcrumb-item"><a href="<?= base_url() . '/' . $postData['category_slug'] ?>"><?= $breadcat; ?></a></li>
                         <li class="breadcrumb-item active" aria-current="page"><?= $postData['title'] ?></li>
                     </ol>
                 </nav>
@@ -153,69 +153,62 @@
                     </div>
 
                     <ol>
-                        <!-- Single Comment Area -->
-                        <li class="single_comment_area">
-                            <!-- Comment Content -->
-                            <div class="comment-content d-flex">
-                                <!-- Comment Author -->
-                                <div class="comment-author">
-                                    <img src="img/bg-img/53.jpg" alt="author">
-                                </div>
-                                <!-- Comment Meta -->
-                                <div class="comment-meta">
-                                    <a href="#" class="comment-date">27 Aug 2019</a>
-                                    <h6>Tomas Mandy</h6>
-                                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius</p>
-                                    <div class="d-flex align-items-center">
-                                        <a href="#" class="like">like</a>
-                                        <a href="#" class="reply">Reply</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <ol class="children">
+                        <?php foreach ($comment as $com) : ?>
+                            <?php if ($com['parent_comment'] == NULL) : ?>
                                 <li class="single_comment_area">
                                     <!-- Comment Content -->
                                     <div class="comment-content d-flex">
                                         <!-- Comment Author -->
                                         <div class="comment-author">
-                                            <img src="img/bg-img/54.jpg" alt="author">
+                                            <img src="<?= base_url() ?>/img/bg-img/53.jpg" alt="author">
                                         </div>
                                         <!-- Comment Meta -->
                                         <div class="comment-meta">
-                                            <a href="#" class="comment-date">27 Aug 2019</a>
-                                            <h6>Britney Millner</h6>
-                                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius</p>
+                                            <a href="#" class="comment-date">
+                                                <?php $date = date_create($com['created_at']); ?>
+                                                <?= date_format($date, "l, d F Y"); ?>
+                                            </a>
+                                            <h6><?= $com['author_comment'] ?></h6>
+                                            <p><?= $com['comment'] ?></p>
                                             <div class="d-flex align-items-center">
                                                 <a href="#" class="like">like</a>
                                                 <a href="#" class="reply">Reply</a>
                                             </div>
                                         </div>
                                     </div>
+                                    <?php
+                                    $this->commentModel = new \App\Models\CommentModel();
+                                    $childComment = $this->commentModel->getChildComment($com['id']);
+                                    ?>
+                                    <?php foreach ($childComment as $cc) : ?>
+                                        <ol class="children">
+                                            <li class="single_comment_area">
+                                                <!-- Comment Content -->
+                                                <div class="comment-content d-flex">
+                                                    <!-- Comment Author -->
+                                                    <div class="comment-author">
+                                                        <img src="<?= base_url() ?>/img/bg-img/54.jpg" alt="author">
+                                                    </div>
+                                                    <!-- Comment Meta -->
+                                                    <div class="comment-meta">
+                                                        <a href="#" class="comment-date">
+                                                            <?php $date = date_create($cc['created_at']); ?>
+                                                            <?= date_format($date, "l, d F Y"); ?>
+                                                        </a>
+                                                        <h6><?= $cc['author_comment'] ?></h6>
+                                                        <p><?= $cc['comment'] ?></p>
+                                                        <div class="d-flex align-items-center">
+                                                            <a href="#" class="like">like</a>
+                                                            <a href="#" class="reply">Reply</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                                 </li>
-                            </ol>
-                        </li>
-
-                        <!-- Single Comment Area -->
-                        <li class="single_comment_area">
-                            <!-- Comment Content -->
-                            <div class="comment-content d-flex">
-                                <!-- Comment Author -->
-                                <div class="comment-author">
-                                    <img src="img/bg-img/55.jpg" alt="author">
-                                </div>
-                                <!-- Comment Meta -->
-                                <div class="comment-meta">
-                                    <a href="#" class="comment-date">27 Aug 2019</a>
-                                    <h6>Simon Downey</h6>
-                                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius</p>
-                                    <div class="d-flex align-items-center">
-                                        <a href="#" class="like">like</a>
-                                        <a href="#" class="reply">Reply</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
                     </ol>
                 </div>
 
@@ -248,131 +241,6 @@
                 </div>
             </div>
 
-            <!-- Sidebar Widget -->
-            <div class="col-12 col-md-6 col-lg-5 col-xl-4">
-                <div class="sidebar-area bg-white mb-30 box-shadow">
-                    <!-- Sidebar Widget -->
-                    <div class="single-sidebar-widget p-30">
-                        <!-- Social Followers Info -->
-                        <div class="social-followers-info">
-                            <!-- Facebook -->
-                            <a href="#" class="facebook-fans"><i class="fa fa-facebook"></i> 4,360 <span>Fans</span></a>
-                            <!-- Twitter -->
-                            <a href="#" class="twitter-followers"><i class="fa fa-twitter"></i> 3,280 <span>Followers</span></a>
-                            <!-- YouTube -->
-                            <a href="#" class="youtube-subscribers"><i class="fa fa-youtube"></i> 1250 <span>Subscribers</span></a>
-                            <!-- Google -->
-                            <a href="#" class="google-followers"><i class="fa fa-google-plus"></i> 4,230 <span>Followers</span></a>
-                        </div>
-                    </div>
 
-                    <!-- Sidebar Widget -->
-                    <div class="single-sidebar-widget p-30">
-                        <!-- Section Title -->
-                        <div class="section-heading">
-                            <h5>Categories</h5>
-                        </div>
-
-                        <!-- Catagory Widget -->
-                        <ul class="catagory-widgets">
-                            <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Life Style</span> <span>35</span></a></li>
-                            <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Travel</span> <span>30</span></a></li>
-                            <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Foods</span> <span>13</span></a></li>
-                            <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Game</span> <span>06</span></a></li>
-                            <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sports</span> <span>28</span></a></li>
-                            <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Football</span> <span>08</span></a></li>
-                            <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> TV Show</span> <span>13</span></a></li>
-                        </ul>
-                    </div>
-
-                    <!-- Sidebar Widget -->
-                    <div class="single-sidebar-widget">
-                        <a href="#" class="add-img"><img src="img/bg-img/add2.png" alt=""></a>
-                    </div>
-
-                    <!-- Sidebar Widget -->
-                    <div class="single-sidebar-widget p-30">
-                        <!-- Section Title -->
-                        <div class="section-heading">
-                            <h5>Hot Channels</h5>
-                        </div>
-
-                        <!-- Single YouTube Channel -->
-                        <div class="single-youtube-channel d-flex">
-                            <div class="youtube-channel-thumbnail">
-                                <img src="img/bg-img/14.jpg" alt="">
-                            </div>
-                            <div class="youtube-channel-content">
-                                <a href="single-post.html" class="channel-title">TV Show</a>
-                                <a href="#" class="btn subscribe-btn"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Subscribe</a>
-                            </div>
-                        </div>
-
-                        <!-- Single YouTube Channel -->
-                        <div class="single-youtube-channel d-flex">
-                            <div class="youtube-channel-thumbnail">
-                                <img src="img/bg-img/15.jpg" alt="">
-                            </div>
-                            <div class="youtube-channel-content">
-                                <a href="single-post.html" class="channel-title">Game Channel</a>
-                                <a href="#" class="btn subscribe-btn"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Subscribe</a>
-                            </div>
-                        </div>
-
-                        <!-- Single YouTube Channel -->
-                        <div class="single-youtube-channel d-flex">
-                            <div class="youtube-channel-thumbnail">
-                                <img src="img/bg-img/16.jpg" alt="">
-                            </div>
-                            <div class="youtube-channel-content">
-                                <a href="single-post.html" class="channel-title">Sport Channel</a>
-                                <a href="#" class="btn subscribe-btn"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Subscribe</a>
-                            </div>
-                        </div>
-
-                        <!-- Single YouTube Channel -->
-                        <div class="single-youtube-channel d-flex">
-                            <div class="youtube-channel-thumbnail">
-                                <img src="img/bg-img/17.jpg" alt="">
-                            </div>
-                            <div class="youtube-channel-content">
-                                <a href="single-post.html" class="channel-title">Travel Channel</a>
-                                <a href="#" class="btn subscribe-btn"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Subscribe</a>
-                            </div>
-                        </div>
-
-                        <!-- Single YouTube Channel -->
-                        <div class="single-youtube-channel d-flex">
-                            <div class="youtube-channel-thumbnail">
-                                <img src="img/bg-img/18.jpg" alt="">
-                            </div>
-                            <div class="youtube-channel-content">
-                                <a href="single-post.html" class="channel-title">LifeStyle Channel</a>
-                                <a href="#" class="btn subscribe-btn"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Subscribe</a>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Sidebar Widget -->
-                    <div class="single-sidebar-widget p-30">
-                        <!-- Section Title -->
-                        <div class="section-heading">
-                            <h5>Newsletter</h5>
-                        </div>
-
-                        <div class="newsletter-form">
-                            <p>Subscribe our newsletter gor get notification about new updates, information discount, etc.</p>
-                            <form action="#" method="get">
-                                <input type="search" name="widget-search" placeholder="Enter your email">
-                                <button type="submit" class="btn mag-btn w-100">Subscribe</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- ##### Post Details Area End ##### -->
-<?= $this->endSection() ?>
+            <!-- ##### Post Details Area End ##### -->
+            <?= $this->endSection() ?>

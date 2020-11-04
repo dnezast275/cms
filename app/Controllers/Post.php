@@ -5,15 +5,19 @@ namespace App\Controllers;
 class Post extends BaseController
 {
 
-    public function index($slug = 'temuan-mutakhir-dari-karya-anak-bangsa')
+    public function index($slug)
     {
-        $postData = $this->postModel->getPost($slug);
+        $postData       = $this->postModel->getPost($slug);
+        $postComment    = $this->commentModel->getCommentBySlug($slug);
+        $breadCat       = $this->categoryModel->getCategoryBySlug($postData['category_slug']);
 
         $data = [
             'title'         => $postData['title'] . ' | dNezast',
-            'breadcumb'     => 'Post',
+            'breadcat'      => $breadCat['category_name'],
+            'breadcumb'     => $postData['title'],
             'postData'      => $postData,
-            'category'    => $this->category,
+            'category'      => $this->category,
+            'comment'       => $postComment,
         ];
 
         return view('blog/post', $data);

@@ -11,7 +11,7 @@ class Category extends BaseController
         $breadcumb      = $this->categoryModel->getCategoryBySlug($slug);
 
         $data = [
-            'title'         => 'Category | dNezast',
+            'title'         => $breadcumb['category_name'] . ' | dNezast',
             'allPost'       => $postByCategory,
             'category'      => $this->category,
             'breadcumb'     => $breadcumb['category_name'],
