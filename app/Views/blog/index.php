@@ -4,61 +4,30 @@
 <!-- ##### Hero Area Start ##### -->
 <div class="hero-area owl-carousel">
     <!-- Single Blog Post -->
-    <div class="hero-blog-post bg-img bg-overlay" style="background-image: url(img/bg-img/1.jpg);">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-12">
-                    <!-- Post Contetnt -->
-                    <div class="post-content text-center">
-                        <div class="post-meta" data-animation="fadeInUp" data-delay="100ms">
-                            <a href="#">MAY 8, 2018</a>
-                            <a href="archive.html">lifestyle</a>
+    <?php foreach ($postData as $p) : ?>
+        <div class="hero-blog-post bg-img bg-overlay" style="background-image: url(<?= $p['bg_img'] ?>);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12">
+                        <!-- Post Contetnt -->
+                        <div class="post-content text-center">
+                            <div class="post-meta" data-animation="fadeInUp" data-delay="100ms">
+                                <a href="#">
+                                    <?php $date = date_create($p['created_at']); ?>
+                                    <?= date_format($date, "l, d F Y"); ?>
+                                </a>
+                                <a href="archive.html">lifestyle</a>
+                            </div>
+                            <a href="<?= base_url('/post') . '/' . $p['slug'] ?>" class="post-title" data-animation="fadeInUp" data-delay="300ms"><?= $p['title']; ?></a>
+                            <a href="<?= base_url('/post') . '/' . $p['slug'] ?>" class="video-play" data-animation="bounceIn" data-delay="500ms">Read more...</a>
                         </div>
-                        <a href="video-post.html" class="post-title" data-animation="fadeInUp" data-delay="300ms">Party Jokes Startling But Unnecessary</a>
-                        <a href="video-post.html" class="video-play" data-animation="bounceIn" data-delay="500ms"><i class="fa fa-play"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php endforeach; ?>
 
-    <!-- Single Blog Post -->
-    <div class="hero-blog-post bg-img bg-overlay" style="background-image: url(img/bg-img/2.jpg);">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-12">
-                    <!-- Post Contetnt -->
-                    <div class="post-content text-center">
-                        <div class="post-meta" data-animation="fadeInUp" data-delay="100ms">
-                            <a href="#">MAY 8, 2018</a>
-                            <a href="archive.html">lifestyle</a>
-                        </div>
-                        <a href="video-post.html" class="post-title" data-animation="fadeInUp" data-delay="300ms">Party Jokes Startling But Unnecessary</a>
-                        <a href="video-post.html" class="video-play" data-animation="bounceIn" data-delay="500ms"><i class="fa fa-play"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Single Blog Post -->
-    <div class="hero-blog-post bg-img bg-overlay" style="background-image: url(img/bg-img/3.jpg);">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-12">
-                    <!-- Post Contetnt -->
-                    <div class="post-content text-center">
-                        <div class="post-meta" data-animation="fadeInUp" data-delay="100ms">
-                            <a href="#">MAY 8, 2018</a>
-                            <a href="archive.html">lifestyle</a>
-                        </div>
-                        <a href="video-post.html" class="post-title" data-animation="fadeInUp" data-delay="300ms">Party Jokes Startling But Unnecessary</a>
-                        <a href="video-post.html" class="video-play" data-animation="bounceIn" data-delay="500ms"><i class="fa fa-play"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <!-- ##### Hero Area End ##### -->
 
@@ -75,63 +44,28 @@
         <div class="trending-now-posts mb-30">
             <!-- Section Title -->
             <div class="section-heading">
-                <h5>TRENDING NOW</h5>
+                <h5>BERITA TERBARU</h5>
             </div>
 
             <div class="trending-post-slides owl-carousel">
-                <!-- Single Trending Post -->
-                <div class="single-trending-post">
-                    <img src="img/bg-img/19.jpg" alt="">
-                    <div class="post-content">
-                        <a href="#" class="post-cata">Video</a>
-                        <a href="video-post.html" class="post-title">Big Savings On Gas While You Travel</a>
-                    </div>
-                </div>
 
                 <!-- Single Trending Post -->
-                <div class="single-trending-post">
-                    <img src="img/bg-img/20.jpg" alt="">
-                    <div class="post-content">
-                        <a href="#" class="post-cata">TV Show</a>
-                        <a href="video-post.html" class="post-title">A Guide To Rocky Mountain Vacations</a>
+                <?php $this->categoryModel = new \App\Models\CategoryModel(); ?>
+                <?php foreach ($postData as $p) : ?>
+                    <?php
+                    $categorySlug = $p['category_slug'];
+                    $categoryPost = $this->categoryModel->getCategoryBySlug($categorySlug);
+                    ?>
+                    <div class="single-trending-post">
+                        <a href="<?= base_url() . '/post/' . $p['slug'] ?>">
+                            <img src="<?= $p['md_img'] ?>" alt="">
+                        </a>
+                        <div class="post-content">
+                            <a href="<?= base_url() . '/category/' . $p['category_slug'] ?>" class="post-cata"><?= $categoryPost['category_name'] ?></a>
+                            <a href="<?= base_url() . '/post/' . $p['slug'] ?>" class="post-title"><?= $p['title'] ?></a>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Single Trending Post -->
-                <div class="single-trending-post">
-                    <img src="img/bg-img/21.jpg" alt="">
-                    <div class="post-content">
-                        <a href="#" class="post-cata">Sports</a>
-                        <a href="video-post.html" class="post-title">The Health Benefits Of Sunglasses</a>
-                    </div>
-                </div>
-
-                <!-- Single Trending Post -->
-                <div class="single-trending-post">
-                    <img src="img/bg-img/19.jpg" alt="">
-                    <div class="post-content">
-                        <a href="#" class="post-cata">Video</a>
-                        <a href="video-post.html" class="post-title">Big Savings On Gas While You Travel</a>
-                    </div>
-                </div>
-
-                <!-- Single Trending Post -->
-                <div class="single-trending-post">
-                    <img src="img/bg-img/20.jpg" alt="">
-                    <div class="post-content">
-                        <a href="#" class="post-cata">TV Show</a>
-                        <a href="video-post.html" class="post-title">A Guide To Rocky Mountain Vacations</a>
-                    </div>
-                </div>
-
-                <!-- Single Trending Post -->
-                <div class="single-trending-post">
-                    <img src="img/bg-img/21.jpg" alt="">
-                    <div class="post-content">
-                        <a href="#" class="post-cata">Sports</a>
-                        <a href="video-post.html" class="post-title">The Health Benefits Of Sunglasses</a>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
 
@@ -686,13 +620,9 @@
 
             <!-- Catagory Widget -->
             <ul class="catagory-widgets">
-                <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Life Style</span> <span>35</span></a></li>
-                <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Travel</span> <span>30</span></a></li>
-                <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Foods</span> <span>13</span></a></li>
-                <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Game</span> <span>06</span></a></li>
-                <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sports</span> <span>28</span></a></li>
-                <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> Football</span> <span>08</span></a></li>
-                <li><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> TV Show</span> <span>13</span></a></li>
+                <?php foreach ($category as $cat) : ?>
+                    <li><a href="<?= base_url() . '/category/' . $cat['category_slug'] ?>"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i> <?= $cat['category_name'] ?></span> <span>35</span></a></li>
+                <?php endforeach; ?>
             </ul>
         </div>
 
