@@ -18,4 +18,14 @@ class CommentModel extends Model
     {
         return $this->db->table('child_comment')->where(['parent_comment' => $parentComment])->get()->getResultArray();
     }
+
+    public function addComment($data)
+    {
+        $this->db->table('comment')->insert($data);
+    }
+
+    public function addChildComment($data)
+    {
+        $this->db->table('child_comment')->insert($data);
+    }
 }
