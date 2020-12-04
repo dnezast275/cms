@@ -22,9 +22,9 @@
             <div class="col-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Category</a></li>
-                        <li class="breadcrumb-item"><a href="#"><?= $breadcumb ?></a></li>
+                        <li class="breadcrumb-item"><a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Category</a></li>
+                        <li class="breadcrumb-item"><a href="<?= base_url() . '/category/' . $link ?>"><?= $breadcumb ?></a></li>
                     </ol>
                 </nav>
             </div>
@@ -45,7 +45,7 @@
                         <div class="single-catagory-post d-flex flex-wrap">
                             <!-- Thumbnail -->
 
-                            <a href="<?= base_url('/post') . '/' . $p['slug'] ?>" class="post-thumbnail bg-img single-trending-post" style="background-image: url(<?= base_url() . '/' . $p['md_img'] ?>);"><img src="<?= base_url() . '/' . $p['md_img'] ?>" alt=""></a>
+                            <a href="<?= base_url('/post') . '/' . $p['slug'] ?>" class="post-thumbnail bg-img single-trending-post"><img src="<?= base_url() . '/' . $p['md_img'] ?>" alt=""></a>
 
 
                             <!-- Post Contetnt -->
