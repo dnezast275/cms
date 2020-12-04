@@ -15,6 +15,7 @@ class Category extends BaseController
             'allPost'       => $postByCategory,
             'category'      => $this->category,
             'breadcumb'     => $breadcumb['category_name'],
+            'link'          => $breadcumb['category_slug'],
         ];
 
         return view('blog/category', $data);
