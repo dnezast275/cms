@@ -250,6 +250,7 @@
                                                     <!-- Reply Form -->
                                                     <div class="contact-form-area">
                                                         <form action="<?= base_url('/comment/addcomment') ?>" method="post">
+                                                            <?= csrf_field(); ?>
                                                             <input type="hidden" name="parent_comment" id="parent_comment" value="<?= $cc['parent_comment'] ?>">
                                                             <input type="hidden" name="slug_post" id="parent_comment" value="<?= $postData['slug'] ?>">
                                                             <div class="row">
@@ -299,6 +300,7 @@
                     <!-- Reply Form -->
                     <div class="contact-form-area">
                         <form action="<?= base_url('/comment/addcomment') ?>" method="post">
+                            <?= csrf_field(); ?>
                             <input type="hidden" name="parent_comment" id="parent_comment" value="">
                             <input type="hidden" name="slug_post" id="parent_comment" value="<?= $postData['slug'] ?>">
                             <div class="row">
