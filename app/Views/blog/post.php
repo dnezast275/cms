@@ -155,7 +155,7 @@
                     <ol>
                         <?php foreach ($comment as $com) : ?>
                             <?php if ($com['parent_comment'] == NULL) : ?>
-                                <li class="single_comment_area">
+                                <li class="single_comment_area" id="comment<?= $com['id'] ?>">
                                     <!-- Comment Content -->
                                     <div class="comment-content d-flex">
                                         <!-- Comment Author -->
@@ -171,11 +171,49 @@
                                             <h6><?= $com['author_comment'] ?></h6>
                                             <p><?= $com['comment'] ?></p>
                                             <div class="d-flex align-items-center">
-                                                <a href="#" class="like">like</a>
-                                                <a href="#" class="reply">Reply</a>
+                                                <a href="#" class="reply" id="reply<?= $com['id'] ?>"><span class="parent_comment" style="display:none" value="<?= $com['id'] ?>"><?= $com['id'] ?></span>Reply</a>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Post A Comment Area -->
+                                    <div class="post-a-comment-area<?= $com['id'] ?> bg-white mb-30 p-30 box-shadow clearfix comment-form">
+                                        <!-- Section Title -->
+                                        <div class="section-heading">
+                                            <span>Balas ke </span> <span style="font-style: italic; font-weight:600;">"<?= $com['comment'] ?>"</span>
+                                        </div>
+
+                                        <!-- Reply Form -->
+                                        <div class="contact-form-area">
+                                            <form action="<?= base_url('/comment/addcomment') ?>" method="post">
+                                                <input type="hidden" name="parent_comment" id="parent_comment" value="<?= $com['id'] ?>">
+                                                <input type="hidden" name="slug_post" id="parent_comment" value="<?= $postData['slug'] ?>">
+                                                <div class="row">
+                                                    <div class="col-12 col-lg-6">
+                                                        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name*" required>
+                                                    </div>
+                                                    <div class="col-12 col-lg-6">
+                                                        <input type="email" name="email" class="form-control" id="email" placeholder="Your Email*" required>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Message*" required></textarea>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <button class="btn mag-btn mt-30" type="submit">Balas</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        $id = <?= $com['id'] ?>;
+                                        $replyBtn = document.querySelector("a#reply" + <?= $com['id'] ?>);
+                                        $replyBtn.addEventListener("click", function() {
+                                            document.querySelector("div.post-a-comment-area" + <?= $com['id'] ?>).classList.toggle("show-reply");
+                                        });
+                                    </script>
+
                                     <?php
                                     $this->commentModel = new \App\Models\CommentModel();
                                     $childComment = $this->commentModel->getChildComment($com['id']);
@@ -198,36 +236,77 @@
                                                         <h6><?= $cc['author_comment'] ?></h6>
                                                         <p><?= $cc['comment'] ?></p>
                                                         <div class="d-flex align-items-center">
-                                                            <a href="#" class="like">like</a>
-                                                            <a href="#" class="reply">Reply</a>
+                                                            <a href="#" class="reply" id="replyChild<?= $cc['id'] ?>"><span class="parent_comment" style="display:none" value="<?= $cc['id'] ?>"><?= $cc['id'] ?></span>Reply</a>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!-- Post A Comment Area -->
+                                                <div class="post-a-comment-area<?= $com['id'] . '-' . $cc['id'] ?> bg-white mb-30 p-30 box-shadow clearfix comment-form">
+                                                    <!-- Section Title -->
+                                                    <div class="section-heading">
+                                                        <span>Balas ke </span> <span style="font-style: italic; font-weight:600;">"<?= $cc['comment'] ?>"</span>
+                                                    </div>
+
+                                                    <!-- Reply Form -->
+                                                    <div class="contact-form-area">
+                                                        <form action="<?= base_url('/comment/addcomment') ?>" method="post">
+                                                            <input type="hidden" name="parent_comment" id="parent_comment" value="<?= $cc['parent_comment'] ?>">
+                                                            <input type="hidden" name="slug_post" id="parent_comment" value="<?= $postData['slug'] ?>">
+                                                            <div class="row">
+                                                                <div class="col-12 col-lg-6">
+                                                                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name*" required>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <input type="email" name="email" class="form-control" id="email" placeholder="Your Email*" required>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Message*" required></textarea>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <button class="btn mag-btn mt-30" type="submit">Balas</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                                <script>
+                                                    $id = <?= $cc['parent_comment'] ?>;
+                                                    $replyChild = document.querySelector("a#replyChild" + <?= $cc['id'] ?>);
+                                                    $replyChild.addEventListener("click", function() {
+                                                        document.querySelector("div.post-a-comment-area" + <?= $com['id'] ?> + "-" + <?= $cc['id'] ?>).classList.toggle("show-reply");
+                                                    });
+                                                </script>
+
                                             </li>
                                         </ol>
                                     <?php endforeach; ?>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
                                 </li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+
                     </ol>
+
                 </div>
 
                 <!-- Post A Comment Area -->
                 <div class="post-a-comment-area bg-white mb-30 p-30 box-shadow clearfix">
                     <!-- Section Title -->
                     <div class="section-heading">
-                        <h5>LEAVE A REPLY</h5>
+                        <h5>LEAVE A COMMENT</h5>
                     </div>
 
                     <!-- Reply Form -->
                     <div class="contact-form-area">
-                        <form action="#" method="post">
+                        <form action="<?= base_url('/comment/addcomment') ?>" method="post">
+                            <input type="hidden" name="parent_comment" id="parent_comment" value="">
+                            <input type="hidden" name="slug_post" id="parent_comment" value="<?= $postData['slug'] ?>">
                             <div class="row">
                                 <div class="col-12 col-lg-6">
-                                    <input type="text" class="form-control" id="name" placeholder="Your Name*" required>
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name*" required>
                                 </div>
                                 <div class="col-12 col-lg-6">
-                                    <input type="email" class="form-control" id="email" placeholder="Your Email*" required>
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="Your Email*" required>
                                 </div>
                                 <div class="col-12">
                                     <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Message*" required></textarea>
